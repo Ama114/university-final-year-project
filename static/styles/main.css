@@ -1,0 +1,343 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #1a237e;
+    --secondary-color: #0d47a1;
+    --accent-color: #ffc107;
+    --text-color: #333;
+    --light-bg: #f5f5f5;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+/* Header Styles */
+.header {
+    background: linear-gradient(90deg, #1565c0 0%, #42a5f5 100%);
+    padding: 1rem 4vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 18px rgba(21, 101, 192, 0.12);
+    border-bottom: 3px solid #1976d2;
+    gap: 2vw;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-right: 0;
+}
+
+.logo h1 {
+    color: #fff;
+    font-size: 1.7rem;
+    letter-spacing: 1px;
+    font-weight: 700;
+    text-shadow: 1px 2px 8px rgba(33, 150, 243, 0.12);
+    text-transform: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: static;
+    margin-bottom: 0;
+}
+
+.logo img {
+    width: 40px; /* cricket-logo.png */
+    height: 40px; 
+}
+.logo h1::after {
+    content: none;
+}
+
+.nav-menu ul {
+    display: flex;
+    list-style: none;
+    gap: 1.2rem;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu a {
+    color: #e3f2fd;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1.2rem 0.5rem 1.2rem;
+    border-radius: 24px;
+    font-size: 1.25rem;
+    position: relative;
+    transition: all 0.3s cubic-bezier(.4,2,.3,1);
+    letter-spacing: 0.5px;
+    background: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu a:hover {
+    background: linear-gradient(90deg, #ffebe7 0%, #bbdefb 100%);
+    color: #1976d2;
+    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.10);
+}
+
+ 
+
+.nav-menu a.active::after {
+    content: '';
+    display: block;
+    margin: 0 auto;
+    margin-top: 6px;
+    width: 40%;
+    height: 3px;
+    border-radius: 2px;
+    background: #ffc107;
+    box-shadow: 0 2px 8px #ffc10744;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+    margin-left: 0;
+}
+
+.login-btn,
+.register-btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 24px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: all 0.3s cubic-bezier(.4,2,.3,1);
+    border: none;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.10);
+}
+
+.login-btn {
+    color: #1976d2;
+    background: #fff;
+    border: 2px solid #1976d2;
+}
+
+.register-btn {
+    background: linear-gradient(90deg, #ffc107 0%, #fffde7 100%);
+    color: #1976d2;
+    border: 2px solid #ffc107;
+}
+
+.login-btn:hover {
+    background: #e3f2fd;
+    color: #0d47a1;
+    border-color: #42a5f5;
+}
+
+.register-btn:hover {
+    background: linear-gradient(90deg, #fffde7 0%, #ffc107 100%);
+    color: #0d47a1;
+    border-color: #ffb300;
+}
+
+/* Main Content Styles */
+.main-content {
+    margin-top: 80px;
+    padding: 2rem 5%;
+}
+
+.hero-section {
+    text-align: center;
+    padding: 4rem 0;
+    background: linear-gradient(rgba(26, 35, 126, 0.9), rgba(13, 71, 161, 0.9)),
+                url('../assets/cricket-bg.png') center/cover;
+    color: var(--white);
+    border-radius: 10px;
+    margin-bottom: 3rem;
+}
+
+.hero-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.cta-btn {
+    padding: 1rem 2rem;
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.cta-btn:hover {
+    background-color: #ffd54f;
+    transform: translateY(-2px);
+}
+
+/* Features Section */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2.5rem;
+    padding: 2rem 0;
+}
+
+.feature-card {
+    background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+    padding: 2.5rem 2rem 2rem 2rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(26, 35, 126, 0.08), 0 1.5px 4px rgba(33, 150, 243, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 12px 32px rgba(26, 35, 126, 0.18), 0 3px 8px rgba(33, 150, 243, 0.12);
+    background: linear-gradient(120deg, #64b5f6 0%, #bbdefb 100%);
+}
+
+.feature-card i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.2rem auto;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 2.2rem;
+    color: #fff;
+    background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
+    box-shadow: 0 2px 8px rgba(26, 35, 126, 0.12);
+}
+
+.feature-card h3 {
+    color: #fff;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.feature-card p {
+    color: #e3f2fd;
+    font-size: 1.08rem;
+    margin-bottom: 0;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 3rem 5% 1rem;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h4 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: var(--accent-color);
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-links a {
+    color: var(--white);
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .header {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1rem 2vw;
+        gap: 0.5rem;
+    }
+    .logo {
+        margin-right: 0;
+        justify-content: center;
+    }
+    .nav-menu ul {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.7rem;
+        margin: 1rem 0 0 0;
+    }
+    .auth-buttons {
+        margin-top: 0.7rem;
+        justify-content: center;
+    }
+}
+
+.split-image {
+    flex: 1 1 0;
+    background: url('../assets/cricket-logo.png') center center/cover no-repeat;
+    min-width: 0;
+    min-height: 0;
+} 

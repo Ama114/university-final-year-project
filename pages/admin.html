@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Cricket Analysis</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            background: #f5f5f5;
+        }
+        .admin-sidebar {
+            width: 240px;
+            background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1rem 1rem 1rem;
+            min-height: 100vh;
+        }
+        .admin-sidebar h2 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: bold;
+        }
+        .admin-sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .admin-sidebar ul li {
+            margin-bottom: 1.2rem;
+        }
+        .admin-sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            transition: color 0.2s;
+        }
+        .admin-sidebar ul li a:hover, .admin-sidebar ul li a.active {
+            color: #ffc107;
+        }
+        .admin-main {
+            flex: 1;
+            padding: 2.5rem 3vw;
+            background: linear-gradient(135deg, #e3f0ff 0%, #f5faff 100%);
+            border-radius: 18px 0 0 18px;
+            box-shadow: 0 8px 32px #1976d233, 0 1.5px 4px #2196f314;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+        }
+        .admin-section {
+            display: none;
+        }
+        .admin-section.active {
+            display: block;
+        }
+        .admin-header {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: #1976d2;
+        }
+        .logout-btn {
+            margin-top: auto;
+            padding: 0.7rem 1.5rem;
+            background: #fff;
+            color: #1976d2;
+            border: 2px solid #1976d2;
+            border-radius: 24px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: block;
+        }
+        .logout-btn:hover {
+            background: #e3f2fd;
+            color: #0d47a1;
+            border-color: #42a5f5;
+        }
+        .admin-bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.18;
+            z-index: 0;
+            pointer-events: none;
+            animation: float 8s ease-in-out infinite;
+        }
+        .admin-bg-circle1 {
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, #1976d2 60%, #42a5f5 100%);
+            top: -80px;
+            left: -80px;
+            animation-delay: 0s;
+        }
+        .admin-bg-circle2 {
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, #ffc107 60%, #fffde7 100%);
+            bottom: -60px;
+            right: -60px;
+            animation-delay: 4s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-30px) scale(1.05); }
+        }
+        @media (max-width: 900px) {
+            body {
+                flex-direction: column;
+            }
+            .admin-sidebar {
+                width: 100%;
+                flex-direction: row;
+                padding: 1rem 0.5rem;
+                min-height: unset;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .admin-sidebar h2 {
+                margin-bottom: 0;
+                font-size: 1.1rem;
+            }
+            .admin-sidebar ul {
+                display: flex;
+                gap: 1.2rem;
+            }
+            .logout-btn {
+                margin-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="admin-sidebar">
+        <h2>Admin Panel</h2>
+        <ul>
+            <li><a href="#dashboard" class="active" onclick="showSection('dashboard')"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
+            <li><a href="#users" onclick="showSection('users')"><i class="fas fa-users"></i>Manage Users</a></li>
+            <li><a href="#players" onclick="showSection('players')"><i class="fas fa-user-edit"></i>Manage Players</a></li>
+            <li><a href="#teams" onclick="showSection('teams')"><i class="fas fa-users-cog"></i>Manage Teams</a></li>
+            <li><a href="#analytics" onclick="showSection('analytics')"><i class="fas fa-chart-bar"></i>Site Analytics</a></li>
+        </ul>
+        <a href="../index.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </nav>
+    <main class="admin-main">
+        <div class="admin-bg-circle admin-bg-circle1"></div>
+        <div class="admin-bg-circle admin-bg-circle2"></div>
+        <section id="dashboard" class="admin-section active">
+            <div class="admin-header">Welcome, Admin!</div>
+            <p>Quick overview and stats will appear here.</p>
+        </section>
+        <section id="users" class="admin-section">
+            <div class="admin-header">Manage Users</div>
+            <p>View, add, or remove users. (Feature placeholder)</p>
+        </section>
+        <section id="players" class="admin-section">
+            <div class="admin-header">Manage Players</div>
+            <p>Add, edit, or delete player data. (Feature placeholder)</p>
+        </section>
+        <section id="teams" class="admin-section">
+            <div class="admin-header">Manage Teams</div>
+            <p>Add, edit, or delete teams. (Feature placeholder)</p>
+        </section>
+        <section id="analytics" class="admin-section">
+            <div class="admin-header">Site Analytics</div>
+            <p>Basic site statistics and analytics. (Feature placeholder)</p>
+        </section>
+    </main>
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.admin-section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelectorAll('.admin-sidebar ul li a').forEach(link => link.classList.remove('active'));
+            document.querySelector('.admin-sidebar ul li a[href="#' + sectionId + '"]').classList.add('active');
+        }
+    </script>
+</body>
+</html> 

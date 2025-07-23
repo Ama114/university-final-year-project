@@ -1,0 +1,107 @@
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: linear-gradient(120deg, #1e3c72 0%, #2a5298 100%);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(30, 60, 114, 0.18);
+    padding: 36px 40px 40px 40px;
+    border: 2px solid #e3f0ff;
+}
+h2 {
+    color: #1976d2;
+    text-align: center;
+    margin-bottom: 22px;
+    letter-spacing: 1px;
+    font-size: 2.2rem;
+}
+form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+label {
+    font-weight: 700;
+    color: #1976d2;
+    margin-bottom: 4px;
+}
+select, button {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1.5px solid #b3c6e7;
+    font-size: 1rem;
+    font-family: inherit;
+    background: #e3f0ff;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+select:focus, button:focus {
+    border: 2px solid #1976d2;
+    outline: none;
+}
+button {
+    background: linear-gradient(90deg, #ff9800 0%, #ffb74d 100%);
+    color: #fff;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(255, 152, 0, 0.10);
+    transition: background 0.2s;
+}
+button:hover {
+    background: linear-gradient(90deg, #1976d2 0%, #64b5f6 100%);
+}
+.summary-card {
+    background: #e3f0ff;
+    border-radius: 16px;
+    padding: 22px 28px;
+    margin-bottom: 28px;
+    color: #1a237e;
+    box-shadow: 0 2px 8px rgba(30, 60, 114, 0.10);
+    border: 2px solid #1976d2;
+}
+.summary-card h3 {
+    margin-top: 0;
+    color: #ff9800;
+    font-size: 1.3rem;
+}
+.summary-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.summary-card li {
+    margin-bottom: 10px;
+    font-size: 1.08rem;
+}
+.plot-section {
+    text-align: center;
+    margin-top: 18px;
+}
+.plot-section img {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(30, 60, 114, 0.10);
+    margin-top: 10px;
+}
+.cricket-emoji {
+    font-size: 2.2rem;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+@media (max-width: 600px) {
+    .container {
+        padding: 16px 6px;
+    }
+    form {
+        flex-direction: column;
+        gap: 12px;
+    }
+}

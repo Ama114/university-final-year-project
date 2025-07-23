@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Cricket Player Analysis System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='assets/cricket-logo.png') }}" alt="Cricket Logo">
+            <h1>CRYCLYZING</h1>
+        </div>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="{{ url_for('home') }}" class="active">Home</a></li>
+                <li><a href="{{ url_for('batting') }}">Batting Performance</a></li>
+                <li><a href="{{ url_for('bowling') }}">Bowling Performance</a></li>
+                <li><a href="{{ url_for('team') }}">Best Select Team</a></li>
+                <li><a href="{{ url_for('admin') }}">Admin Panel</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <a href="{{ url_for('login') }}" class="login-btn">Logout</a>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="main-content">
+        <section class="hero-section">
+            <h2>Welcome to National Cricket Player Analysis System</h2>
+            <p>Comprehensive analysis and statistics for cricket players</p>
+            <div class="cta-buttons">
+                <a href="{{ url_for('batting') }}" class="cta-btn">View Batting Stats</a>
+                <a href="{{ url_for('bowling') }}" class="cta-btn">View Bowling Stats</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <i class="fas fa-baseball-ball"></i>
+                <h3>Batting Analysis</h3>
+                <p>Detailed batting statistics and performance metrics</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-bowling-ball"></i>
+                <h3>Bowling Analysis</h3>
+                <p>Comprehensive bowling statistics and analysis</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-users"></i>
+                <h3>Team Selection</h3>
+                <p>Create and analyze the best possible team</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About Us</h4>
+                <p>National Cricket Player Analysis System provides comprehensive cricket statistics and analysis tools.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('batting') }}">Batting Stats</a></li>
+                    <li><a href="{{ url_for('bowling') }}">Bowling Stats</a></li>
+                    <li><a href="{{ url_for('comparison') }}">Player Comparison</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: info@cricketanalysis.com</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 National Cricket Player Analysis System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

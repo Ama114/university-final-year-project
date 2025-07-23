@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Batting Performance Analysis</title>
+    <link rel="stylesheet" href="<link rel="stylesheet" href="../static/styles/batting.css">
+</head>
+<body>
+    <h2>🏏 Batting Performance Analysis</h2>
+    <form method="POST">
+        <label>Filter by:</label>
+        <select name="filter_type" onchange="this.form.submit()">
+            <option value="Player & Ground" {% if filter_type == 'Player & Ground' %}selected{% endif %}>Player & Ground</option>
+            <option value="Player & Opposition" {% if filter_type == 'Player & Opposition' %}selected{% endif %}>Player & Opposition</option>
+        </select>
+        <br>
+        <label>Player:</label>
+        <select name="player" onchange="this.form.submit()">
+            {% for p in players %}
+                <option value="{{ p }}" {% if selected_player == p %}selected{% endif %}>{{ p }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label>{{ label }}:</label>
+        <select name="selected">
+            {% for opt in options %}
+                <option value="{{ opt }}" {% if selected == opt %}selected{% endif %}>{{ opt }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit">Show Result</button>
+    </form>
+
+    {% if summary %}
+    <h3>📜 Historical Performance Summary — {{ summary.context }}</h3>
+    <ul>
+        <li>Total Matches: {{ summary.total_matches }}</li>
+        <li>Total Runs: {{ summary.total_runs }}</li>
+        <li>Average Runs: {{ summary.avg_runs }}</li>
+        <li>Most Common Dismissal: {{ summary.dismissal_mode }}</li>
+        <li>Top Ground Played: {{ summary.top_venue }}</li>
+        <li>Most Dismissed by Bowler: {{ summary.most_bowler_mode }}</li>
+        <li>Most Vulnerable Pitch Type: {{ summary.vulnerable_pitch }}</li>
+        <li>Most Vulnerable Ball Type: {{ summary.vulnerable_ball }}</li>
+    </ul>
+    {% if img %}
+    <h4>📊 Run Distribution</h4>
+    <img src="data:image/png;base64,{{ img }}" alt="Run Distribution">
+    {% endif %}
+    {% endif %}
+</body>
+</html>

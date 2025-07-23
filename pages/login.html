@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Cricket Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        html, body {
+            height: 100%;
+        }
+        body {
+            min-height: 100vh;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: stretch;
+            justify-content: stretch;
+            background: none;
+        }
+        .split-bg {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+        }
+        .split-image {
+            flex: 1 1 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff; /* fallback color */
+            min-width: 0;
+            min-height: 0;
+        }
+        .side-img {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+            display: block;
+        }
+        .split-login {
+            flex: 1 1 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            min-height: 100vh;
+            padding-top: 3.5rem;
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+        }
+        .login-container {
+            background: linear-gradient(135deg, #1565c0 0%, #42a5f5 100%);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            padding: 2.5rem 2rem 2rem 2rem;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(26, 35, 126, 0.18);
+            width: 100%;
+            max-width: 370px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .login-container::before {
+            content: ''; /* Remove the accent top bar */
+        }
+        .login-icon {
+            position: relative;
+            z-index: 2;
+            margin: 0 auto 1.2rem auto;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(26, 35, 126, 0.12);
+        }
+        .login-icon i {
+            color: #1976d2;
+            font-size: 2rem;
+        }
+        .login-container h2 {
+            color: #fff;
+            margin-bottom: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.9);
+            transition: border-color 0.2s;
+        }
+        .login-container input:focus {
+            border-color: #90caf9;
+            outline: none;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 0.75rem;
+            background: #ffc107;
+            color: #1976d2;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 8px #ffc10733;
+        }
+        .login-container button:hover {
+            background: #ffeb3b;
+            box-shadow: 0 4px 16px #ffc10744;
+        }
+        .error-message {
+            color: #ffeb3b;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        @media (max-width: 900px) {
+            .split-bg {
+                flex-direction: column;
+                height: auto;
+            }
+            .split-image {
+                display: none;
+            }
+            .split-login {
+                padding-top: 1.5rem;
+            }
+            .login-container {
+                border-radius: 18px;
+                max-width: 100%;
+            }
+        }
+        @media (max-width: 500px) {
+            .login-container {
+                padding: 1.5rem 0.5rem 1rem 0.5rem;
+            }
+        }
+        .login-topic {
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 2.8rem;
+            margin-top: 0;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 2px 8px #1976d299;
+            position: relative;
+            line-height: 1.2;
+        }
+        .login-topic-underline {
+            display: block;
+            margin: 0.5rem auto 0 auto;
+            width: 48px;
+            height: 3px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, #ffc107 0%, #42a5f5 100%);
+            box-shadow: 0 2px 8px #1976d233;
+        }
+        .login-form-centerer {
+            flex: 1;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            width: 100%;
+        }
+        @media (max-width: 900px) {
+            .login-topic {
+                font-size: 1rem;
+                margin-bottom: 1.2rem;
+            }
+            .login-topic-underline {
+                width: 32px;
+                height: 2px;
+            }
+        }
+        .login-logo {
+            display: block;
+            margin: 0 auto 1.2rem auto;
+            max-width: 90px;
+            max-height: 90px;
+        }
+    </style>
+</head>
+<body>
+    <div class="split-bg">
+        <!-- (ඔබගේ split-image code එක මෙහි add කරන්න) -->
+        <div class="split-login">
+            <div class="login-topic">
+                NATIONAL CRICKET PLAYER ANALYSIS SYSTEM
+                <span class="login-topic-underline"></span>
+            </div>
+            <div class="login-form-centerer">
+                <div class="login-container">
+                    <div class="login-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h2>Login</h2>
+                    {% if error %}
+                        <div class="error-message" id="errorMsg">{{ error }}</div>
+                    {% endif %}
+                    <form method="POST" action="{{ url_for('login') }}">
+                        <input type="text" name="username" placeholder="Username" required />
+                        <input type="password" name="password" placeholder="Password" required />
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            // Demo credentials
+            if(username === 'admin' && password === 'admin123') {
+                window.location.href = '../index.html';
+            } else {
+                document.getElementById('errorMsg').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html> 
