@@ -36,16 +36,40 @@
                 <span>Historical Performance Summary</span>
                 <span class="summary-location">— {{ summary.context }}</span>
             </div>
-            <ul class="summary-list">
-                <li><span class="stat-label">Total Matches:</span> <span class="stat-value">{{ summary.total_matches }}</span></li>
-                <li><span class="stat-label">Total Runs:</span> <span class="stat-value">{{ summary.total_runs }}</span></li>
-                <li><span class="stat-label">Average Runs:</span> <span class="stat-value">{{ summary.avg_runs }}</span></li>
-                <li><span class="stat-label">Most Common Dismissal:</span> <span class="stat-value">{{ summary.dismissal_mode }}</span></li>
-                <li><span class="stat-label">Top Ground Played:</span> <span class="stat-value">{{ summary.top_venue }}</span></li>
-                <li><span class="stat-label">Most Dismissed by Bowler:</span> <span class="stat-value">{{ summary.most_bowler_mode }}</span></li>
-                <li><span class="stat-label">Most Vulnerable Pitch Type:</span> <span class="stat-value">{{ summary.vulnerable_pitch }}</span></li>
-                <li><span class="stat-label">Most Vulnerable Ball Type:</span> <span class="stat-value">{{ summary.vulnerable_ball }}</span></li>
-            </ul>
+            <table class="summary-table">
+                <tr>
+                    <th class="stat-label">Total Matches:</th>
+                    <td class="stat-value">{{ summary.total_matches }}</td>
+                </tr>
+                <tr>
+                    <th class="stat-label">Total Runs:</th>
+                    <td class="stat-value">{{ summary.total_runs }}</td>
+                </tr>
+                <tr>
+                    <th class="stat-label">Average Runs:</th>
+                    <td class="stat-value">{{ summary.avg_runs }}</td>
+                </tr>
+                <tr>
+                    <th class="stat-label">Most Common Dismissal:</th>
+                    <td class="stat-value">{{ summary.dismissal_mode }}</td>
+                </tr>
+                <tr>
+                    <th class="stat-label">Top Ground Played:</th>
+                    <td class="stat-value">{{ summary.top_venue }}</td>
+                </tr>
+                <tr>
+                    <th class="stat-label">Most Dismissed by Bowler:</th>
+                    <td class="stat-value">{{ summary.most_bowler_mode }}</td>
+                </tr>
+                <tr>
+                    <th class="stat-label">Most Vulnerable Pitch Type:</th>
+                    <td class="stat-value">{{ summary.vulnerable_pitch }}</td>
+                </tr>
+                <tr>
+                    <th class="stat-label">Most Vulnerable Ball Type:</th>
+                    <td class="stat-value">{{ summary.vulnerable_ball }}</td>
+                </tr>
+            </table>
         </div>
         {% if img %}
         <div class="batting-chart-section">
