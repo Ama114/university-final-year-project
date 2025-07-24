@@ -1,107 +1,249 @@
 body {
-    font-family: 'Roboto', Arial, sans-serif;
-    background: linear-gradient(120deg, #1e3c72 0%, #2a5298 100%);
+    font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+    background: linear-gradient(120deg, #1e3c72 0%, #2a5298 60%, #00c6ff 100%);
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    position: relative;
+    /* Subtle cricket pattern overlay */
+    overflow-x: hidden;
+}
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('../assets/cricket-bg.png') repeat center center/cover;
+    opacity: 0.07;
+    z-index: 0;
+    pointer-events: none;
 }
 .container {
-    max-width: 800px;
-    margin: 40px auto;
+    max-width: 850px;
+    margin: 48px auto;
     background: #fff;
-    border-radius: 18px;
-    box-shadow: 0 8px 32px rgba(30, 60, 114, 0.18);
-    padding: 36px 40px 40px 40px;
-    border: 2px solid #e3f0ff;
+    border-radius: 22px;
+    box-shadow: 0 10px 40px rgba(30, 60, 114, 0.18), 0 2px 8px #00c6ff33;
+    padding: 44px 48px 48px 48px;
+    border: 2.5px solid #00c6ff;
+    position: relative;
+    z-index: 1;
+    margin-top: 32px;
 }
 h2 {
-    color: #1976d2;
-    text-align: center;
-    margin-bottom: 22px;
-    letter-spacing: 1px;
+    background: linear-gradient(90deg, #1e3c72 0%, #1976d2 100%);
+    color: #fff;
+    border-radius: 16px 16px 0 0;
+    padding: 24px 0 18px 0;
+    margin-bottom: 32px;
     font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-align: center;
+    box-shadow: 0 2px 8px #00c6ff22;
 }
 form {
     display: flex;
     flex-wrap: wrap;
-    gap: 22px;
+    gap: 28px;
     justify-content: center;
-    margin-bottom: 32px;
+    margin-bottom: 38px;
+    background: linear-gradient(90deg, #e3f0ff 60%, #b3e5fc 100%);
+    border-radius: 14px;
+    box-shadow: 0 2px 12px #00c6ff22;
+    padding: 18px 0 10px 0;
+    position: relative;
+    z-index: 1;
 }
 label {
-    font-weight: 700;
-    color: #1976d2;
-    margin-bottom: 4px;
+    font-weight: 800;
+    color: #00bcd4;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+    font-size: 1.08rem;
+    text-shadow: 0 1px 4px #00c6ff22;
 }
 select, button {
-    padding: 10px 16px;
-    border-radius: 8px;
-    border: 1.5px solid #b3c6e7;
-    font-size: 1rem;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: 2px solid #b3c6e7;
+    font-size: 1.08rem;
     font-family: inherit;
     background: #e3f0ff;
-    transition: border 0.2s, box-shadow 0.2s;
+    transition: border 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+    box-shadow: 0 1px 6px #00c6ff11;
 }
 select:focus, button:focus {
-    border: 2px solid #1976d2;
+    border: 2.5px solid #00bcd4;
     outline: none;
+    box-shadow: 0 0 0 2px #00c6ff44;
 }
 button {
-    background: linear-gradient(90deg, #ff9800 0%, #ffb74d 100%);
+    background: linear-gradient(90deg, #ff9800 0%, #ffb74d 60%, #00bcd4 100%);
     color: #fff;
-    font-weight: 700;
+    font-weight: 800;
     border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 16px rgba(255, 152, 0, 0.13), 0 2px 8px #00c6ff22;
+    transition: background 0.2s, box-shadow 0.2s;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(255, 152, 0, 0.10);
-    transition: background 0.2s;
 }
 button:hover {
-    background: linear-gradient(90deg, #1976d2 0%, #64b5f6 100%);
+    background: linear-gradient(90deg, #1976d2 0%, #00c6ff 100%);
+    color: #fffde7;
+    box-shadow: 0 6px 24px #00c6ff33, 0 2px 8px #ff980033;
+    transform: translateY(-2px) scale(1.04);
 }
 .summary-card {
-    background: #e3f0ff;
-    border-radius: 16px;
-    padding: 22px 28px;
-    margin-bottom: 28px;
+    background: linear-gradient(120deg, #e3f0ff 70%, #b3e5fc 100%);
+    border-radius: 18px;
+    padding: 28px 34px;
+    margin-bottom: 32px;
     color: #1a237e;
-    box-shadow: 0 2px 8px rgba(30, 60, 114, 0.10);
-    border: 2px solid #1976d2;
+    box-shadow: 0 4px 16px #00c6ff22, 0 2px 8px #1976d222;
+    border: 2.5px solid #00bcd4;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+.summary-card::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle, #ff9800 0%, #ffb74d 80%, transparent 100%);
+    opacity: 0.18;
+    z-index: 0;
 }
 .summary-card h3 {
     margin-top: 0;
     color: #ff9800;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 4px #ff980044;
+    position: relative;
+    z-index: 1;
 }
 .summary-card ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    position: relative;
+    z-index: 1;
 }
 .summary-card li {
-    margin-bottom: 10px;
-    font-size: 1.08rem;
+    margin-bottom: 12px;
+    font-size: 1.12rem;
+    padding-left: 18px;
+    position: relative;
+}
+.summary-card li::before {
+    content: '\26BE'; /* cricket ball emoji */
+    position: absolute;
+    left: 0;
+    color: #00bcd4;
+    font-size: 1.1em;
+    top: 0.1em;
 }
 .plot-section {
     text-align: center;
-    margin-top: 18px;
+    margin-top: 22px;
+    position: relative;
+    z-index: 1;
 }
 .plot-section img {
     max-width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(30, 60, 114, 0.10);
-    margin-top: 10px;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px #00c6ff22, 0 2px 8px #1976d222;
+    margin-top: 12px;
+    border: 2px solid #00bcd4;
 }
 .cricket-emoji {
-    font-size: 2.2rem;
-    margin-right: 8px;
+    font-size: 2.4rem;
+    margin-right: 10px;
     vertical-align: middle;
+    filter: drop-shadow(0 2px 4px #00c6ff44);
 }
+::-webkit-scrollbar {
+    width: 10px;
+    background: #e3f0ff;
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(120deg, #00bcd4 0%, #1976d2 100%);
+    border-radius: 8px;
+}
+.batting-summary-card, .batting-chart-section {
+    background: linear-gradient(120deg, #e3f0ff 70%, #b3e5fc 100%);
+    border-radius: 18px;
+    box-shadow: 0 4px 16px #00c6ff22, 0 2px 8px #1976d222;
+    border: 2.5px solid #1976d2;
+    margin-bottom: 32px;
+}
+
+.summary-header, .chart-header {
+    background: linear-gradient(90deg, #00c6ff 0%, #1976d2 100%);
+    color: #fff;
+    border-radius: 12px 12px 0 0;
+    padding: 12px 18px;
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+}
+
+.summary-location {
+  font-size: 1.1rem;
+  color: #ff9800;
+  margin-left: 10px;
+  font-weight: 600;
+}
+
+.summary-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.summary-list li {
+  margin-bottom: 12px;
+  font-size: 1.08rem;
+  display: flex;
+  align-items: center;
+}
+
+.stat-label {
+  color: #1976d2;
+  font-weight: 700;
+  min-width: 210px;
+  display: inline-block;
+}
+
+.stat-value {
+    background: linear-gradient(90deg, #ffb74d 0%, #00c6ff 100%);
+    color: #fff;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 3px 14px;
+    box-shadow: 0 1px 6px #00c6ff33;
+    margin-left: 10px;
+    font-size: 1.08em;
+}
+
 @media (max-width: 600px) {
     .container {
-        padding: 16px 6px;
+        padding: 18px 6px;
     }
     form {
         flex-direction: column;
-        gap: 12px;
+        gap: 14px;
+        padding: 10px 0 6px 0;
+    }
+    .summary-card {
+        padding: 16px 8px;
+    }
+    h2 {
+        font-size: 1.5rem;
     }
 }

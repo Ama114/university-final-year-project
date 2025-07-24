@@ -5,49 +5,60 @@
     <title>Batting Performance Analysis</title>
     <link rel="stylesheet" href="../static/styles/batting.css">
 </head>
-</head>
 <body>
-    <h2>🏏 Batting Performance Analysis</h2>
-    <form method="POST">
-        <label>Filter by:</label>
-        <select name="filter_type" onchange="this.form.submit()">
-            <option value="Player & Ground" {% if filter_type == 'Player & Ground' %}selected{% endif %}>Player & Ground</option>
-            <option value="Player & Opposition" {% if filter_type == 'Player & Opposition' %}selected{% endif %}>Player & Opposition</option>
-        </select>
-        <br>
-        <label>Player:</label>
-        <select name="player" onchange="this.form.submit()">
-            {% for p in players %}
-                <option value="{{ p }}" {% if selected_player == p %}selected{% endif %}>{{ p }}</option>
-            {% endfor %}
-        </select>
-        <br>
-        <label>{{ label }}:</label>
-        <select name="selected">
-            {% for opt in options %}
-                <option value="{{ opt }}" {% if selected == opt %}selected{% endif %}>{{ opt }}</option>
-            {% endfor %}
-        </select>
-        <br>
-        <button type="submit">Show Result</button>
-    </form>
+    <div class="container">
+        <h2>🏏 Batting Performance Analysis</h2>
+        <form method="POST">
+            <label>Filter by:</label>
+            <select name="filter_type" onchange="this.form.submit()">
+                <option value="Player & Ground" {% if filter_type == 'Player & Ground' %}selected{% endif %}>Player & Ground</option>
+                <option value="Player & Opposition" {% if filter_type == 'Player & Opposition' %}selected{% endif %}>Player & Opposition</option>
+            </select>
+            <label>Player:</label>
+            <select name="player" onchange="this.form.submit()">
+                {% for p in players %}
+                    <option value="{{ p }}" {% if selected_player == p %}selected{% endif %}>{{ p }}</option>
+                {% endfor %}
+            </select>
+            <label>{{ label }}:</label>
+            <select name="selected">
+                {% for opt in options %}
+                    <option value="{{ opt }}" {% if selected == opt %}selected{% endif %}>{{ opt }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Show Result</button>
+        </form>
 
-    {% if summary %}
-    <h3>📜 Historical Performance Summary — {{ summary.context }}</h3>
-    <ul>
-        <li>Total Matches: {{ summary.total_matches }}</li>
-        <li>Total Runs: {{ summary.total_runs }}</li>
-        <li>Average Runs: {{ summary.avg_runs }}</li>
-        <li>Most Common Dismissal: {{ summary.dismissal_mode }}</li>
-        <li>Top Ground Played: {{ summary.top_venue }}</li>
-        <li>Most Dismissed by Bowler: {{ summary.most_bowler_mode }}</li>
-        <li>Most Vulnerable Pitch Type: {{ summary.vulnerable_pitch }}</li>
-        <li>Most Vulnerable Ball Type: {{ summary.vulnerable_ball }}</li>
-    </ul>
-    {% if img %}
-    <h4>📊 Run Distribution</h4>
-    <img src="data:image/png;base64,{{ img }}" alt="Run Distribution">
-    {% endif %}
-    {% endif %}
+        {% if summary %}
+        <div class="batting-summary-card">
+            <div class="summary-header">
+                <span class="cricket-emoji">🏏</span>
+                <span>Historical Performance Summary</span>
+                <span class="summary-location">— {{ summary.context }}</span>
+            </div>
+            <ul class="summary-list">
+                <li><span class="stat-label">Total Matches:</span> <span class="stat-value">{{ summary.total_matches }}</span></li>
+                <li><span class="stat-label">Total Runs:</span> <span class="stat-value">{{ summary.total_runs }}</span></li>
+                <li><span class="stat-label">Average Runs:</span> <span class="stat-value">{{ summary.avg_runs }}</span></li>
+                <li><span class="stat-label">Most Common Dismissal:</span> <span class="stat-value">{{ summary.dismissal_mode }}</span></li>
+                <li><span class="stat-label">Top Ground Played:</span> <span class="stat-value">{{ summary.top_venue }}</span></li>
+                <li><span class="stat-label">Most Dismissed by Bowler:</span> <span class="stat-value">{{ summary.most_bowler_mode }}</span></li>
+                <li><span class="stat-label">Most Vulnerable Pitch Type:</span> <span class="stat-value">{{ summary.vulnerable_pitch }}</span></li>
+                <li><span class="stat-label">Most Vulnerable Ball Type:</span> <span class="stat-value">{{ summary.vulnerable_ball }}</span></li>
+            </ul>
+        </div>
+        {% if img %}
+        <div class="batting-chart-section">
+            <div class="chart-header">
+                <span class="chart-emoji">📊</span>
+                <span>Run Distribution</span>
+            </div>
+            <div class="chart-container">
+                <img src="data:image/png;base64,{{ img }}" alt="Run Distribution">
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
 </body>
 </html>
