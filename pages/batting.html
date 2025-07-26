@@ -8,81 +8,82 @@
 <body>
     <div class="container">
         <h2>🏏 Batting Performance Analysis</h2>
-        <form method="POST">
+        <form id="batting-form" method="POST" onsubmit="return false;">
             <label>Filter by:</label>
-            <select name="filter_type" onchange="this.form.submit()">
+            <select name="filter_type" id="filter_type">
                 <option value="Player & Ground" {% if filter_type == 'Player & Ground' %}selected{% endif %}>Player & Ground</option>
                 <option value="Player & Opposition" {% if filter_type == 'Player & Opposition' %}selected{% endif %}>Player & Opposition</option>
             </select>
             <label>Player:</label>
-            <select name="player" onchange="this.form.submit()">
+            <select name="player" id="player" onchange="autoUpdateSummary()">
                 {% for p in players %}
                     <option value="{{ p }}" {% if selected_player == p %}selected{% endif %}>{{ p }}</option>
                 {% endfor %}
             </select>
-            <label>{{ label }}:</label>
-            <select name="selected">
+            <label id="label-main">{{ label }}:</label>
+            <select name="selected" id="selected">
                 {% for opt in options %}
                     <option value="{{ opt }}" {% if selected == opt %}selected{% endif %}>{{ opt }}</option>
                 {% endfor %}
             </select>
-            <button type="submit">Show Result</button>
+            <button type="submit" onclick="manualSubmit()">Show Result</button>
         </form>
 
-        {% if summary %}
-        <div class="batting-summary-card">
-            <div class="summary-header">
-                <span class="cricket-emoji">🏏</span>
-                <span>Historical Performance Summary</span>
-                <span class="summary-location">— {{ summary.context }}</span>
-            </div>
-            <table class="summary-table">
-                <tr>
-                    <th class="stat-label">Total Matches:</th>
-                    <td class="stat-value">{{ summary.total_matches }}</td>
-                </tr>
-                <tr>
-                    <th class="stat-label">Total Runs:</th>
-                    <td class="stat-value">{{ summary.total_runs }}</td>
-                </tr>
-                <tr>
-                    <th class="stat-label">Average Runs:</th>
-                    <td class="stat-value">{{ summary.avg_runs }}</td>
-                </tr>
-                <tr>
-                    <th class="stat-label">Most Common Dismissal:</th>
-                    <td class="stat-value">{{ summary.dismissal_mode }}</td>
-                </tr>
-                <tr>
-                    <th class="stat-label">Top Ground Played:</th>
-                    <td class="stat-value">{{ summary.top_venue }}</td>
-                </tr>
-                <tr>
-                    <th class="stat-label">Most Dismissed by Bowler:</th>
-                    <td class="stat-value">{{ summary.most_bowler_mode }}</td>
-                </tr>
-                <tr>
-                    <th class="stat-label">Most Vulnerable Pitch Type:</th>
-                    <td class="stat-value">{{ summary.vulnerable_pitch }}</td>
-                </tr>
-                <tr>
-                    <th class="stat-label">Most Vulnerable Ball Type:</th>
-                    <td class="stat-value">{{ summary.vulnerable_ball }}</td>
-                </tr>
-            </table>
-        </div>
-        {% if img %}
-        <div class="batting-chart-section">
-            <div class="chart-header">
-                <span class="chart-emoji">📊</span>
-                <span>Run Distribution</span>
-            </div>
-            <div class="chart-container">
-                <img src="data:image/png;base64,{{ img }}" alt="Run Distribution">
+        <div id="auto-summary-section" style="display: flex; align-items: flex-start; gap: 32px; margin-top: 32px;">
+            <img id="player-photo" src="../static/assets/{{ selected_player|lower|replace(' ', '_') }}.jpg" alt="Player Photo" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; box-shadow: 0 2px 12px rgba(0,0,0,0.12); border: 3px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.2);">
+            <div style="flex: 1;">
+                <div class="summary-header">
+                    <span class="cricket-emoji">🏏</span>
+                    <span>Historical Performance Summary</span>
+                    <span class="summary-location" id="summary-context">— {{ selected_player }}</span>
+                </div>
+                <table class="summary-table">
+                    <tr><th class="stat-label">Total Matches:</th><td class="stat-value" id="summary-matches"></td></tr>
+                    <tr><th class="stat-label">Total Runs:</th><td class="stat-value" id="summary-runs"></td></tr>
+                    <tr><th class="stat-label">Average Runs:</th><td class="stat-value" id="summary-avg"></td></tr>
+                    <tr><th class="stat-label">Most Common Dismissal:</th><td class="stat-value" id="summary-dismissal"></td></tr>
+                    <tr><th class="stat-label">Top Ground Played:</th><td class="stat-value" id="summary-ground"></td></tr>
+                    <tr><th class="stat-label">Most Dismissed by Bowler:</th><td class="stat-value" id="summary-bowler"></td></tr>
+                    <tr><th class="stat-label">Most Vulnerable Pitch Type:</th><td class="stat-value" id="summary-pitch"></td></tr>
+                    <tr><th class="stat-label">Most Vulnerable Ball Type:</th><td class="stat-value" id="summary-ball"></td></tr>
+                </table>
             </div>
         </div>
-        {% endif %}
-        {% endif %}
+
+        <script>
+        function autoUpdateSummary() {
+            const player = document.getElementById('player').value;
+            const ground = document.getElementById('selected').value;
+            fetch('/api/player_summary', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({player: player, ground: ground})
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update image
+                const img = document.getElementById('player-photo');
+                img.src = '/static/assets/' + data.image;
+                img.onerror = function() { this.src = '/static/assets/cricket-logo.png'; };
+                // Update summary fields
+                document.getElementById('summary-context').textContent = '— ' + data.summary.context;
+                document.getElementById('summary-matches').textContent = data.summary.total_matches;
+                document.getElementById('summary-runs').textContent = data.summary.total_runs;
+                document.getElementById('summary-avg').textContent = data.summary.avg_runs;
+                document.getElementById('summary-dismissal').textContent = data.summary.dismissal_mode;
+                document.getElementById('summary-ground').textContent = data.summary.top_venue;
+                document.getElementById('summary-bowler').textContent = data.summary.most_bowler_mode;
+                document.getElementById('summary-pitch').textContent = data.summary.vulnerable_pitch;
+                document.getElementById('summary-ball').textContent = data.summary.vulnerable_ball;
+            });
+        }
+        window.onload = function() {
+            autoUpdateSummary();
+        };
+        function manualSubmit() {
+            document.getElementById('batting-form').submit();
+        }
+        </script>
     </div>
 </body>
 </html>

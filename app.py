@@ -1,4 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for
+import matplotlib
+matplotlib.use('Agg')
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -137,6 +139,43 @@ def batting():
         summary=summary,
         img=img
     )
+
+@app.route('/api/player_summary', methods=['POST'])
+def player_summary_api():
+    data = request.get_json()
+    player = data.get('player')
+    ground = data.get('ground')
+    player_enc = label_encoders['Player Name'].transform([player])[0]
+    ground_enc = label_encoders['Ground'].transform([ground])[0]
+    filtered = df[(df['Player Name'] == player_enc) & (df['Ground'] == ground_enc)]
+    total_matches = len(filtered)
+    total_runs = filtered['Runs'].sum()
+    avg_runs = round(filtered['Runs'].mean(), 2) if not filtered.empty else 'N/A'
+    dismissal_mode = label_encoders['Dismissal'].inverse_transform(
+        [filtered['Dismissal'].mode().iloc[0]])[0] if not filtered['Dismissal'].mode().empty else "N/A"
+    top_venue = label_encoders['Ground'].inverse_transform(
+        [filtered['Ground'].mode().iloc[0]])[0] if not filtered['Ground'].mode().empty else "N/A"
+    most_bowler_mode = label_encoders['bowler'].inverse_transform(
+        [filtered['bowler'].mode().iloc[0]])[0] if not filtered['bowler'].mode().empty else "N/A"
+    vulnerable_pitch = label_encoders['Pitch Type'].inverse_transform(
+        [filtered['Pitch Type'].mode().iloc[0]])[0] if not filtered['Pitch Type'].mode().empty else "N/A"
+    vulnerable_ball = filtered['dismissal shot'].mode().iloc[0] if 'dismissal shot' in filtered.columns and not filtered['dismissal shot'].mode().empty else "N/A"
+
+    image_filename = player.lower().replace(' ', '_') + '.jpg'
+    return jsonify({
+        'summary': {
+            'context': f'{player} at {ground}',
+            'total_matches': total_matches,
+            'total_runs': total_runs,
+            'avg_runs': avg_runs,
+            'dismissal_mode': dismissal_mode,
+            'top_venue': top_venue,
+            'most_bowler_mode': most_bowler_mode,
+            'vulnerable_pitch': vulnerable_pitch,
+            'vulnerable_ball': vulnerable_ball
+        },
+        'image': image_filename
+    })
 
 if __name__ == '__main__':
     app.run(debug=True)
